@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+# Copyright (c) Facebook, Inc. and its affiliates.
+
+"""
+TridentNet Training Script.
+
+This script is a simplified version of the training script in detectron2/tools.
+"""
+import os
+
+from detectron2.config import get_cfg
+from detectron2.engine import DefaultTrainer
+from detectron2.data import MetadataCatalog
+from detectron2.data.datasets import register_coco_instances
+from detectron2.data.catalog import DatasetCatalog
+
+from tridentnet import add_tridentnet_config
+coco_metadata = MetadataCatalog.get("coco_2017_val")
+
+if __name__ == "__main__":
+    register_coco_instances("nia_train", {}, 'D:/dataset/occlusion/annotation/train/annotation_coco.json', 'D:/dataset/occlusion/img')
+    register_coco_instances("nia_test", {}, 'D:/dataset/occlusion/annotation/test/annotation_coco.json', 'E:/dataset/occlusion/img')
+    my_dataset_train_metadata = MetadataCatalog.get("nia_train")
+    dataset_dicts = DatasetCatalog.get("nia_train")
+
+    cfg = get_cfg()
+    add_tridentnet_config(cfg)
+
+    cfg.merge_from_file("configs/tridentnet_fast_R_101_C4_3x.yaml")
+    cfg.DATASETS.TRAIN = ("nia_train",)
+    cfg.DATASETS.TEST = ("nia_test",)
+
+    cfg.SOLVER.IMS_PER_BATCH = 4
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 82
+
+    os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
+    trainer = DefaultTrainer(cfg)
+    trainer.resume_or_load(resume=False)
+    trainer.train()
+
