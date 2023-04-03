@@ -17,8 +17,8 @@ from detectron2.data.catalog import DatasetCatalog
 coco_metadata = MetadataCatalog.get("coco_2017_val")
 
 if __name__ == "__main__":
-    register_coco_instances("nia_train", {}, 'D:/dataset/occlusion/annotation/train/annotation_coco_is.json', 'D:/dataset/occlusion/img')
-    register_coco_instances("nia_test", {}, 'D:/dataset/occlusion/annotation/test/annotation_coco_is.json', 'E:/dataset/occlusion/img')
+    register_coco_instances("nia_train", {}, '/dataset/occlusion/annotation/train/annotation_coco_is.json', '/dataset/occlusion/img')
+    register_coco_instances("nia_test", {}, '/dataset/occlusion/annotation/test/annotation_coco_is.json', '/dataset/occlusion/img')
     my_dataset_train_metadata = MetadataCatalog.get("nia_train")
     dataset_dicts = DatasetCatalog.get("nia_train")
 

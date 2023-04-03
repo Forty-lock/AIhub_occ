@@ -35,7 +35,7 @@ from detectron2.data.catalog import DatasetCatalog
 from detectron2.data.datasets import register_coco_instances
 
 if __name__ == "__main__":
-    register_coco_instances("nia_test", {}, './annotation_coco_is.json', 'E:/dataset/occlusion/img')
+    register_coco_instances("nia_test", {}, '/dataset/occlusion/annotation/test/annotation_coco_is.json', '/dataset/occlusion/img')
 
     cfg = get_cfg()
     add_pointrend_config(cfg)

@@ -26,7 +26,7 @@ from tridentnet import add_tridentnet_config
 from detectron2.utils.visualizer import Visualizer, ColorMode
 
 if __name__ == "__main__":
-    register_coco_instances("nia_test", {}, './annotation_coco.json', 'E:/dataset/occlusion/img')
+    register_coco_instances("nia_test", {}, '/dataset/occlusion/annotation/test/annotation_coco.json', '/dataset/occlusion/img')
 
     cfg = get_cfg()
     add_tridentnet_config(cfg)

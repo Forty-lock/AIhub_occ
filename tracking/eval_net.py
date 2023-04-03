@@ -40,13 +40,13 @@ if __name__ == "__main__":
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # set a custom testing threshold
     predictor = DefaultPredictor(cfg)
 
-    images = glob.glob('./annotation/*.json')
+    images = glob.glob('/dataset/occlusion/annotation/test/*.json')
 
     aps = []
     st = ''
 
     for idx, i in enumerate(tqdm(images)):
-        register_coco_instances("nia_test_%04d" % idx, {}, i, 'E:/dataset/occlusion/img')
+        register_coco_instances("nia_test_%04d" % idx, {}, i, '/dataset/occlusion/img')
 
         with open(i, 'r') as f:
             json_anno = json.load(f)
